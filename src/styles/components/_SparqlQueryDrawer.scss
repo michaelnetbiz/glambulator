@@ -1,0 +1,28 @@
+@import '../settings/colors';
+
+.sparqlQueryDrawer .sparqlQueryExpression {
+  color: $white;
+  font-family: Roboto Mono, Courier, monospace;
+}
+
+.sparqlQueryDrawer h1 span:first-child {
+  font-family: Roboto, sans-serif;
+}
+
+.sparqlQueryDrawer h1 span:last-child {
+  font-family: Roboto Mono, Courier, monospace;
+}
+
+.sparqlQueryDrawer h3 span:first-child {
+  font-family: Roboto, sans-serif;
+}
+
+.sparqlQueryDrawer h3 span:first-child {
+  font-family: Roboto Mono, Courier, monospace;
+}
+
+.sparqlQueryDrawer table {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}

@@ -1,0 +1,27 @@
+.sparqlQueryResult {
+  list-style: none;
+}
+
+.sparqlQueryResult a {
+  font-family: "Roboto Mono", monospace;
+  text-decoration: none;
+}
+
+.sparqlQueryResult a:hover, .sparqlQueryResult a:focus {
+}
+
+.sparqlQueryResult a .syntax {
+  margin-left: .25em;
+  margin-right: .25em;
+  font-size: 0.4em !important;
+}
+
+.sparqlQueryResult a .prefixDeclaration {
+
+}
+.sparqlQueryResult a .selectClauseSet {
+
+}
+.sparqlQueryResult a .whereClauseSet {}
+.sparqlQueryResult a .solutionModifierSet {}
+.sparqlQueryResult a .constraintSet {}

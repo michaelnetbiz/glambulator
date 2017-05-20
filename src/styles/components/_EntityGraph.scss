@@ -1,0 +1,29 @@
+line {
+  cursor: pointer;
+  stroke-opacity: 0.6;
+}
+
+circle {
+  cursor: pointer;
+  stroke-width: 1.5px;
+}
+
+text {
+  cursor: pointer;
+  font: 10px sans-serif;
+}
+
+.entityGraph {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+
+.edgeLabel {
+  font-family: "Roboto Mono", Courier, monospace;
+}
+
+.vertexLabel {
+  font-family: "Roboto Mono", Courier, monospace;
+}
