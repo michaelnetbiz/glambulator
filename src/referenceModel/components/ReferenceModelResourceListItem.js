@@ -6,6 +6,7 @@ const ReferenceModelResourceListItem = (parameters: Object) =>{
   const {resource} = parameters;
   return (
     <ListItem
+      className={"listItem referenceModelResourceListItem"}
       key={resource.id}
       leftIcon={<DescriptionIcon/>}
       nestedItems={[

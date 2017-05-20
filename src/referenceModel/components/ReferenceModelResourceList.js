@@ -6,7 +6,7 @@ import ReferenceModelResourceListItem from "./ReferenceModelResourceListItem";
 const ReferenceModelResourceList = (parameters: Object) => {
   const {resources} = parameters;
   return (
-    <section className="graph tab referenceModelTree">
+    <section className="list referenceModelResourceList">
       <List>
         {
           resources.map((resource, ix) => {
