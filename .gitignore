@@ -1,0 +1,15 @@
+.eslintcache
+.DS_Store
+.idea
+.node_repl_history
+.npm
+.sass-cache
+.yarn-integrity
+/coverage
+/log
+/dist
+/flow-typed
+/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
