@@ -1,0 +1,12 @@
+[ignore]
+.*/dist/.*
+.*/test/.*
+
+[options]
+emoji=true
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
+experimental.const_params=true
+experimental.strict_type_args=true
+log.file='<PROJECT_ROOT>/log/'
+munge_underscores=true
