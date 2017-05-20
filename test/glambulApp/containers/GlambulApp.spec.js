@@ -1,7 +1,7 @@
-import {expect} from "chai";
+import chai from "chai";
 
 describe("GlambulApp", () => {
   it("Should do sth", () => {
-    expect("GlambulApp").to.be.a("string");
+    chai.expect("GlambulApp").to.be.a("string");
   });
 });

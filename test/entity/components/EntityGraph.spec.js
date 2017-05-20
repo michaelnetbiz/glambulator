@@ -1,7 +1,7 @@
-import {expect} from "chai";
+import chai from "chai";
 
 describe("EntityGraph", () => {
   it("Should do sth", () => {
-    expect("EntityGraph").to.be.a("string");
+    chai.expect("EntityGraph").to.be.a("string");
   });
 });
