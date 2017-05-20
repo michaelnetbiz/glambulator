@@ -9,7 +9,7 @@
     "lint": "node_modules/.bin/esw src",
     "lint:watch": "npm run lint -- --watch",
     "serve": "node_modules/.bin/webpack-dev-server -d --progress --colors --inline --hot --open --content-base src/",
-    "start": "npm-run-all --parallel serve lint:watch",
+    "start": "npm-run-all --parallel serve lint:watch test:watch",
     "test": "mocha --compilers js:babel-core/register --require ./test/setup.js --reporter progress \"test/**/*.spec.js\"",
     "test:watch": "npm run test -- --watch"
   },
