@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Application for exploring cidoc-crm specification, implementations thereof, and collections organized by it",
   "scripts": {
-    "build": "babel-node build.js && cp ./src/assets/cidoc_crm_v6.2.1-draft-b-2015October.rdfs ./dist/cidoc_crm_v621.rdfs",
+    "build": "webpack --optimize-minimize --define process.env.NODE_ENV=\"'production'\" && cp ./src/assets/cidoc_crm_v6.2.1-draft-b-2015October.rdfs ./dist/cidoc_crm_v621.rdfs",
     "clean-dist": "node_modules/.bin/rimraf ./dist && mkdir dist",
     "flow": "flow",
     "lint": "node_modules/.bin/esw src",
