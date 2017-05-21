@@ -46,7 +46,7 @@
   ],
   "rules": {
     "comma-dangle": 2,
-    "consistent-return": 2,
+    "consistent-return": 0,
     "curly": 2,
     "default-case": 2,
     "dot-notation": 2,
@@ -74,7 +74,7 @@
     "no-ex-assign": 2,
     "no-extra-bind": 2,
     "no-extra-boolean-cast": 2,
-    "no-extra-parens": 2,
+    "no-extra-parens": 0,
     "no-extra-semi": 2,
     "no-fallthrough": 2,
     "no-floating-decimal": 2,
