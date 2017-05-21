@@ -5,7 +5,7 @@ export const GET_REFERENCE_MODEL = "GET_REFERENCE_MODEL";
 
 export const SET_REFERENCE_MODEL = "SET_REFERENCE_MODEL";
 
-const referenceModelEndpoint = "http://localhost:3000/assets/cidoc_crm_v621.rdfs";
+const referenceModelEndpoint = "http://glambulator.matrix.msu.edu/cidoc_crm_v621.rdfs";
 
 const fetchReferenceModel = (): Promise<Response> => {
   return fetch(referenceModelEndpoint);
