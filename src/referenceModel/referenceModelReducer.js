@@ -1,5 +1,5 @@
 // @flow
-import {INITIAL_REFERENCE_MODEL_STATE} from "../glambulApp/store/initialState";
+import {INITIAL_REFERENCE_MODEL_STATE} from "../app/store/initialState";
 import {
   GET_REFERENCE_MODEL,
   SET_REFERENCE_MODEL

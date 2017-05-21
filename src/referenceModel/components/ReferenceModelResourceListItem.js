@@ -2,7 +2,7 @@ import React from "react";
 import {ListItem} from "material-ui/List";
 import DescriptionIcon from "material-ui/svg-icons/action/description";
 
-const ReferenceModelResourceListItem = (parameters: Object) =>{
+const ReferenceModelResourceListItem = (parameters: Object) => {
   const {resource} = parameters;
   return (
     <ListItem
@@ -37,8 +37,7 @@ const ReferenceModelResourceListItem = (parameters: Object) =>{
       secondaryText={resource.description}
       secondaryTextLines={2}
     />
-  )
-
+  );
 };
 
 export default ReferenceModelResourceListItem;

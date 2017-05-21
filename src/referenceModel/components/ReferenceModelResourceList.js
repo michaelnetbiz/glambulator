@@ -1,28 +1,34 @@
 // @flow
-import React from "react";
+import React, {Component} from "react";
 import {List} from "material-ui/List";
 import ReferenceModelResourceListItem from "./ReferenceModelResourceListItem";
 
-const ReferenceModelResourceList = (parameters: Object) => {
-  const {resources} = parameters;
-  return (
-    <section className="list referenceModelResourceList">
-      <List>
-        {
-          resources.map((resource, ix) => {
-              return (
-                <ReferenceModelResourceListItem
-                  key={ix}
-                  resource={resource}
-                />
-              );
-            }
-          )
-        }
-      </List>
-    </section>
-  );
-};
+class ReferenceModelResourceList extends Component {
+  constructor() {
+    super();
+  }
+
+  props: {
+    resources: Array<Object>;
+  };
+
+  render() {
+    return (
+      <section className="list referenceModelResourceList">
+        <List children={this.props.resources.map((resource, ix) => {
+            return (
+              <ReferenceModelResourceListItem
+                key={ix}
+                resource={resource}
+              />
+            );
+          }
+        )}
+        />
+      </section>
+    );
+  }
+}
 
 export default ReferenceModelResourceList;
 
