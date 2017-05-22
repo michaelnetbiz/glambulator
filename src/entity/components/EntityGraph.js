@@ -215,15 +215,12 @@ class EntityGraph extends Component {
                     selectable={false}
                   >
                     <TableRowColumn>
-                      <td>{stmt.subj.type}</td>
                       <td>{stmt.subj.value}</td>
                     </TableRowColumn>
                     <TableRowColumn>
-                      <td>{stmt.pred.type}</td>
                       <td>{stmt.pred.value}</td>
                     </TableRowColumn>
                     <TableRowColumn>
-                      <td>{stmt.obj.type}</td>
                       <td>{stmt.obj.value}</td>
                     </TableRowColumn>
                   </TableRow>
