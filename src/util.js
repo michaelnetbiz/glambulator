@@ -51,8 +51,10 @@ export const normalizeString = (str: string) => {
 };
 
 export const groupExpressions = {
-  "britishMuseum": "http:\/\/collection\.britishmuseum\.org\/id\/.*",
-  "erlangen": "http:\/\/erlangen-crm\.org\/current\/.*",
+  "britishMuseum": "http:\/\/.*\.britishmuseum\.org\/.*",
+  "dbpedia": "http:\/\/dbpedia\.org\/.*",
+  "erlangen": "http:\/\/erlangen-crm\.org\/.*",
+  "qudt": "http:\/\/qudt\.org\/.*",
   "rdf": "http:\/\/www\.w3\.org\/1999\/02\/22\-rdf\-syntax\-ns\#.*",
   "rdfs": "http:\/\/www\.w3\.org\/2000\/01\/rdf\-schema\#.*",
   "skos": "http:\/\/www\.w3\.org\/2004\/02\/skos\/core\#.*",
@@ -60,17 +62,36 @@ export const groupExpressions = {
 };
 
 export const classExpressions = {
-  "bibliographicObject": "http:\/\/collection\.britishmuseum\.org\/id\/bibliography\/.*",
-  "collectionObject": "http:\/\/collection\.britishmuseum\.org\/id\/.*",
-  "department": "http:\/\/collection\.britishmuseum\.org\/id\/department\/.*",
-  "dimension": "http:\/\/collection\.britishmuseum\.org\/id\/dimension\/.*",
-  "modelExtension": "http:\/\/collection\.britishmuseum\.org\/id\/ontology\/.*",
+  "britishMuseumBibliographicObject": "http:\/\/collection\.britishmuseum\.org\/id\/bibliography\/.*",
+  "britishMuseumCollectionObject": "http:\/\/collection\.britishmuseum\.org\/id\/.*",
+  "britishMuseumCollectionAsset": "http:\/\/www\.britishmuseum\.org\/collectionimages\/.*",
+  "britishMuseumDepartment": "http:\/\/collection\.britishmuseum\.org\/id\/department\/.*",
+  "britishMuseumDimension": "http:\/\/collection\.britishmuseum\.org\/id\/dimension\/.*",
+  "britishMuseumModelExtension": "http:\/\/collection\.britishmuseum\.org\/id\/ontology\/.*",
+  "britishMuseumPersonOrInstitution": "http:\/\/collection\.britishmuseum\.org\/id\/person-institution\/.*",
+  "britishMuseumTerm": "http:\/\/collection\.britishmuseum\.org\/id\/thesauri\/.*",
+  "britishMuseumUnit": "http:\/\/collection\.britishmuseum\.org\/id\/units\/.*",
+  "dbpediaResource": "http:\/\/dbpedia\.org\/.*",
   "ontologyResource": "http:\/\/erlangen-crm\.org\/current\/.*",
   "owlResource": "http:\/\/www\.w3\.org\/2002\/07\/owl\#.*",
-  "personOrInstitution": "http:\/\/collection\.britishmuseum\.org\/id\/person-institution\/.*",
-  "rdfSchemaEntity": "http:\/\/www\.w3\.org\/2000\/01\/rdf\-schema\#.*",
-  "rdfSyntaxEntity": "http:\/\/www\.w3\.org\/1999\/02\/22\-rdf\-syntax\-ns\#.*",
-  "skosTerm": "http:\/\/www\.w3\.org\/2004\/02\/skos\/core\#.*",
-  "term": "http:\/\/collection\.britishmuseum\.org\/id\/thesauri\/.*",
-  "unit": "http:\/\/collection\.britishmuseum\.org\/id\/units\/.*"
+  "qudtSchemaResource": "http:\/\/qudt\.org\/schema\/qudt\#.*",
+  "qudtTerm": "http:\/\/qudt\.org\/vocab\/.*",
+  "rdfSchemaResource": "http:\/\/www\.w3\.org\/2000\/01\/rdf\-schema\#.*",
+  "rdfSyntaxResource": "http:\/\/www\.w3\.org\/1999\/02\/22\-rdf\-syntax\-ns\#.*",
+  "skosResource": "http:\/\/www\.w3\.org\/2004\/02\/skos\/core\#.*"
+};
+
+export const constructQueryIsA = (obj: string) => {
+  return {
+    "sparqlQueryName": `isa ${obj}`,
+    "sparqlQueryDescription": `Returns twenty instances of ${obj}.`,
+    "sparqlQueryExpression": {
+      "prefix": "crm: <http://erlangen-crm.org/current/>",
+      "select distinct": "?instance",
+      "where": `{ ?instance a crm:${obj} }`,
+      "filter": false,
+      "order": false,
+      "limit": 20
+    }
+  };
 };
