@@ -2,6 +2,15 @@
 import React, {Component} from "react";
 import {event, select} from "d3-selection";
 import {drag} from "d3-drag";
+import {Card, CardMedia, CardTitle} from "material-ui/Card";
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn
+} from "material-ui/Table";
 import * as colors from "material-ui/styles/colors";
 import Entity from "../Entity";
 import Edge from "./Edge";
@@ -107,7 +116,7 @@ class EntityGraph extends Component {
     selection: Entity;
     simulation: () => mixed;
     size: number;
-    statements: Map<number, Set<Entity>>;
+    statements: Map<number, Object>;
     vertexData: Array<Object>;
     width: number;
   };
@@ -115,7 +124,7 @@ class EntityGraph extends Component {
   handleTick: () => mixed;
 
   render() {
-    const {dispatch, edgeData, height, size, vertexData, width} = this.props;
+    const {dispatch, edgeData, height, selection, size, statements, vertexData, width} = this.props;
     this.props.simulation.nodes(this.props.vertexData).on("tick", this.handleTick);
     this.props.simulation.force("edge").links(this.props.edgeData);
     const edges = edgeData.map((e, ix) => {
@@ -137,33 +146,92 @@ class EntityGraph extends Component {
       );
     });
     return (
-      <svg
-        className={"entityGraph"}
-        preserveAspectRatio={"xMidYMid slice"}
-        ref={"svg"}
-        viewBox={"0 0 " + width + " " + height}
-        xmlns={"http://www.w3.org/2000/svg"}
-        xmlnsXlink={"http://www.w3.org/1999/xlink"}
-      >
-        <defs>
-          <marker
-            fill={colors.blueGrey600}
-            id={"arrowMarker"}
-            markerHeight={6}
-            markerWidth={6}
-            orient={"auto"}
-            refX={size}
-            refY={0}
-            stroke={colors.blueGrey600}
-            strokeWidth={1}
-            viewBox={"0 -5 10 10"}
+      <div className={"entityGraph"}>
+        <Card>
+          <CardMedia>
+            <svg
+              preserveAspectRatio={"xMidYMid slice"}
+              ref={"svg"}
+              viewBox={"0 0 " + width + " " + height}
+              xmlns={"http://www.w3.org/2000/svg"}
+              xmlnsXlink={"http://www.w3.org/1999/xlink"}
+            >
+              <defs>
+                <marker
+                  fill={colors.blueGrey600}
+                  id={"arrowMarker"}
+                  markerHeight={6}
+                  markerWidth={6}
+                  orient={"auto"}
+                  refX={size}
+                  refY={0}
+                  stroke={colors.blueGrey600}
+                  strokeWidth={1}
+                  viewBox={"0 -5 10 10"}
+                >
+                  <path d={"M0, -5L10, 0L0, 5"}/>
+                </marker>
+              </defs>
+              {edges}
+              {vertices}
+            </svg>
+          </CardMedia>
+          <CardTitle
+            subtitle={selection.type}
+            title={selection.value}
+          />
+        </Card>
+        <Table
+          className={"wtf"}
+          selectable={false}
+        >
+          <TableHeader
+            displaySelectAll={false}
+            enableSelectAll={false}
           >
-            <path d={"M0, -5L10, 0L0, 5"}/>
-          </marker>
-        </defs>
-        {edges}
-        {vertices}
-      </svg>
+            <TableRow
+              selectable={false}
+            >
+              <TableHeaderColumn>
+                {"subject"}
+              </TableHeaderColumn>
+              <TableHeaderColumn>
+                {"object"}
+              </TableHeaderColumn>
+              <TableHeaderColumn>
+                {"predicate"}
+              </TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody
+            showRowHover
+          >
+            {
+              [...statements].map((currElem) => {
+                let [i, stmt] = currElem;
+                return (
+                  <TableRow
+                    key={i}
+                    selectable={false}
+                  >
+                    <TableRowColumn>
+                      <td>{stmt.subj.type}</td>
+                      <td>{stmt.subj.value}</td>
+                    </TableRowColumn>
+                    <TableRowColumn>
+                      <td>{stmt.pred.type}</td>
+                      <td>{stmt.pred.value}</td>
+                    </TableRowColumn>
+                    <TableRowColumn>
+                      <td>{stmt.obj.type}</td>
+                      <td>{stmt.obj.value}</td>
+                    </TableRowColumn>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </div>
     );
   }
 }

@@ -9,7 +9,7 @@ class Vertex extends Component {
   static draw(selection: Object, size: number) {
     selection
       .select("title")
-      .text((d) => d.abbreviatedValue);
+      .text((d) => d.value);
 
     selection
       .select("circle")

@@ -71,15 +71,15 @@ class EntityGraphContainer extends Component {
 const mapStateToProps = (state: Object) => {
   const {entity} = state;
   const {entities, selection, statements} = entity;
-  const height = 1104;
+  const height = 690;
   const width = 1104;
-  const size = (height / entities.size) / 10;
+  const size = (height / entities.size) / 7.5;
   const simulation = forceSimulation()
     .force("edge", forceLink()
       .id((d) => {
         return d.id;
       })
-      .distance(size * 30)
+      .distance((size * 40) + 200)
     )
     .force("repel", forceManyBody().strength(-100))
     .force("x", forceX(width / 2).strength(0.2))
