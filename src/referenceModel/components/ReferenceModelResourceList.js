@@ -9,15 +9,19 @@ class ReferenceModelResourceList extends Component {
   }
 
   props: {
+    dispatch: () => mixed;
     resources: Array<Object>;
   };
 
   render() {
     return (
       <section className="list referenceModelResourceList">
-        <List children={this.props.resources.map((resource, ix) => {
+        <List children={this.props.resources.filter((resource) => {
+          return resource.type === "rdfs:Class";
+        }).map((resource, ix) => {
             return (
               <ReferenceModelResourceListItem
+                dispatch={this.props.dispatch}
                 key={ix}
                 resource={resource}
               />

@@ -30,7 +30,7 @@ class Resource {
 
   description: string;
   id: string;
-  sparqlQueryName: string;
+  name: string;
   supers: Array<mixed>;
   type: string;
 
@@ -43,7 +43,7 @@ class Resource {
     });
     let labelNode = Resource.getRdfsLabelNode(resourceNodeChildren).pop();
     let commentNode = Resource.getRdfsCommentNode(resourceNodeChildren).pop();
-    this.sparqlQueryName = labelNode ? labelNode.textContent : ""; //this.id.replace(/_/gi, " ");
+    this.name = labelNode ? labelNode.textContent : "";
     this.description = commentNode ? commentNode.textContent : "";
     if (this.type === "rdf:Property") {
       Resource.getRdfsSubPropertyOfNodes(resourceNodeChildren).forEach((nodeChild) => {
