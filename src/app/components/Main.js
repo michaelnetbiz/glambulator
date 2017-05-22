@@ -5,7 +5,7 @@ import * as colors from "material-ui/styles/colors";
 import EntityGraphContainer from "../../entity/containers/EntityGraphContainer";
 import ReferenceModelContainer from "../../referenceModel/containers/ReferenceModelContainer";
 import SparqlQueryContainer from "../../sparqlQuery/containers/SparqlQueryContainer";
-import {setTab} from "../glambulActions";
+import {setTab} from "../appActions";
 import ReferenceModelTabLabel from "../../referenceModel/components/ReferenceModelTabLabel";
 import EntityGraphTabLabel from "../../entity/components/EntityGraphTabLabel";
 import SparqlQueryResultsTabLabel from "../../sparqlQuery/components/SparqlQueryResultsTabLabel";

@@ -22,6 +22,7 @@ export const INITIAL_SPARQL_QUERY_STATE = {
 
 export const INITIAL_UI_STATE = {
   "currentTab": "referenceModel",
+  "isFeedbackIssuing": false,
   "isLoading": false,
   "isMobile": false, //TODO: provide for mobile and other user agents
   "isNavDrawerOpen": false,

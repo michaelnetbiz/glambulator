@@ -1,9 +1,19 @@
 // @flow
 import {INITIAL_UI_STATE} from "./store/initialState";
-import {SET_TAB, TOGGLE_LOADING, TOGGLE_NAV_DRAWER, TOGGLE_SPARQL_QUERY_DRAWER} from "./glambulActions";
+import {
+  SET_FEEDBACK,
+  SET_TAB,
+  TOGGLE_LOADING,
+  TOGGLE_NAV_DRAWER,
+  TOGGLE_SPARQL_QUERY_DRAWER
+} from "./appActions";
 
-const uiReducer = (state: Object = INITIAL_UI_STATE, action: Object) => {
+const appReducer = (state: Object = INITIAL_UI_STATE, action: Object) => {
   switch (action.type) {
+    case SET_FEEDBACK:
+      return Object.assign({}, state, {
+        "message": action.feedback.message
+      });
     case SET_TAB:
       return Object.assign({}, state, {
         "currentTab": action.tabId
@@ -25,4 +35,4 @@ const uiReducer = (state: Object = INITIAL_UI_STATE, action: Object) => {
   }
 };
 
-export default uiReducer;
+export default appReducer;

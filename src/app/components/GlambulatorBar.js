@@ -6,7 +6,7 @@ import * as colors from "material-ui/styles/colors";
 import CloseIcon from "material-ui/svg-icons/navigation/close";
 import CodeIcon from "material-ui/svg-icons/action/code";
 import MenuIcon from "material-ui/svg-icons/navigation/menu";
-import {toggleNavDrawer, toggleSparqlQueryDrawer} from "../glambulActions";
+import {toggleNavDrawer, toggleSparqlQueryDrawer} from "../appActions";
 
 class GlambulatorBar extends Component {
   constructor() {

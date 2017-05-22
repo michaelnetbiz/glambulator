@@ -5,7 +5,7 @@ import {Provider} from "react-redux";
 import ReactDOM from "react-dom";
 import injectTapEventPlugin from "react-tap-event-plugin";
 import configureStore from "./app/store/configureStore";
-import {DEFAULT} from "./sparqlQuery/Expressions";
+import {constructQueryIsA} from "./util";
 import {setSparqlQuery} from "./sparqlQuery/sparqlQueryActions";
 import {executeReferenceModelRequest} from "./referenceModel/referenceModelActions";
 import App from "./app/containers/App";
@@ -14,7 +14,7 @@ import "./styles/style.scss";
 injectTapEventPlugin();
 
 const store = configureStore();
-store.dispatch(setSparqlQuery(DEFAULT));
+store.dispatch(setSparqlQuery(constructQueryIsA("E8_Acquisition")));
 store.dispatch(executeReferenceModelRequest());
 
 ReactDOM.render(

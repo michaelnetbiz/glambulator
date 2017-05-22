@@ -1,8 +1,16 @@
 // @flow
+export const SET_FEEDBACK = "SET_FEEDBACK";
 export const SET_TAB = "SET_TAB";
+export const TOGGLE_FEEDBACK = "TOGGLE_FEEDBACK";
 export const TOGGLE_LOADING = "TOGGLE_LOADING";
 export const TOGGLE_NAV_DRAWER = "TOGGLE_NAV_DRAWER";
 export const TOGGLE_SPARQL_QUERY_DRAWER = "TOGGLE_SPARQL_QUERY_DRAWER";
+
+export const setFeedback = (feedback: Object) => {
+  return {
+    "type": SET_FEEDBACK, feedback
+  };
+};
 
 export const setTab = (tabId: string) => {
   return {
@@ -16,16 +24,14 @@ export const toggleLoading = (isLoading: boolean) => {
   };
 };
 
-export const toggleSparqlQueryDrawer = (isQueryDrawerOpen: boolean) => {
-  let toggled = !isQueryDrawerOpen;
+export const toggleSparqlQueryDrawer = () => {
   return {
-    "type": TOGGLE_SPARQL_QUERY_DRAWER, toggled
+    "type": TOGGLE_SPARQL_QUERY_DRAWER
   };
 };
 
-export const toggleNavDrawer = (isNavDrawerOpen: boolean) => {
-  let toggled = !isNavDrawerOpen;
+export const toggleNavDrawer = () => {
   return {
-    "type": TOGGLE_NAV_DRAWER, toggled
+    "type": TOGGLE_NAV_DRAWER
   };
 };
