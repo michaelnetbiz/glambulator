@@ -4,7 +4,7 @@ import * as colors from "material-ui/styles/colors";
 import Drawer from "material-ui/Drawer";
 import IconButton from "material-ui/IconButton";
 import SendIcon from "material-ui/svg-icons/content/send";
-import {setTab, toggleSparqlQueryDrawer} from "../../app/glambulActions";
+import {setTab, toggleSparqlQueryDrawer} from "../../app/appActions";
 import {executeSparqlQuery} from "../../sparqlQuery/sparqlQueryActions";
 
 class SparqlQueryDrawer extends Component {

@@ -11,10 +11,10 @@ class SparqlQueryContainer extends Component {
 
   render() {
     let thingToRender;
-    if (this.props.sparqlQueryResults) {
-      thingToRender = <SparqlQueryResultsList {...this.props} />;
-    } else {
+    if (!this.props.sparqlQueryResults) {
       thingToRender = <h1>{"No query executed."}</h1>;
+    } else {
+      thingToRender = <SparqlQueryResultsList {...this.props} />;
     }
     return (
       thingToRender

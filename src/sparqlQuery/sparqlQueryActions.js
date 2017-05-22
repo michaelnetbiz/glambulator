@@ -30,13 +30,6 @@ export const fetchSparqlQueryResults = (sparqlQuery: Object): Promise<Response> 
   return fetch(buildSparqlQuery(sparqlQuery));
 };
 
-export const executeSparqlQueryExpression = (sparqlQuery: Object) => {
-  return {
-    "type": EXECUTE_SPARQL_QUERY_EXPRESSION,
-    sparqlQuery
-  };
-};
-
 export const parseSparqlQueryResponse = (sparqlQueryResponse: Object) => {
   let entityCollection: EntityCollection;
   entityCollection = new EntityCollection(sparqlQueryResponse, "SparqlResponse");
