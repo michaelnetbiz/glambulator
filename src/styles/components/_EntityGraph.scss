@@ -15,10 +15,7 @@
 
 .entityGraph svg {
   display: inline-block;
-  left: 0;
-  margin-top: 3em;
   position: absolute;
-  top: 10px;
 }
 
 .entityGraph .edgeLabel {
@@ -27,11 +24,4 @@
 
 .entityGraph .vertexLabel {
   font-family: "Roboto Mono", Courier, monospace;
-}
-
-.entityGraph:last-child div:first-child table {
-  margin-top: 18em;
-  @media (min-width: 36em) {
-    margin-top: 36em;
-  }
 }

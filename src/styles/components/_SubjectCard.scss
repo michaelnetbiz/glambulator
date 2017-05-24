@@ -1,0 +1,13 @@
+.subjectCard .subjectCardHeader div span:first-child {
+  font-size: 0.7em !important;
+  @media (min-width: 37.5em) {
+    font-size: 0.9375em !important;
+  }
+}
+
+.subjectCard .subjectCardHeader div span:last-child {
+  font-size: 0.65em !important;
+  @media (min-width: 37.5em) {
+    font-size: 0.875em !important;
+  }
+}
