@@ -10,22 +10,19 @@ class SparqlQueryContainer extends Component {
   }
 
   render() {
-    let thingToRender;
-    if (!this.props.sparqlQueryResults) {
-      thingToRender = <h1>{"No query executed."}</h1>;
-    } else {
-      thingToRender = <SparqlQueryResultsList {...this.props} />;
-    }
-    return (
-      thingToRender
-    );
+    return <SparqlQueryResultsList {...this.props} />;
   }
 }
 
 const mapStateToProps = (state: Object) => {
-  const {sparqlQuery} = state;
-  const {sparqlQueryResults} = sparqlQuery;
+  const {common, entity, sparqlQuery} = state;
+  const {loadingColor} = common;
+  const {isEntityLoading} = entity;
+  const {isSparqlQueryLoading, sparqlQueryResults} = sparqlQuery;
   return {
+    isEntityLoading,
+    isSparqlQueryLoading,
+    loadingColor,
     sparqlQueryResults
   };
 };

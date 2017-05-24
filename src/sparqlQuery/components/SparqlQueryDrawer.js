@@ -4,8 +4,8 @@ import * as colors from "material-ui/styles/colors";
 import Drawer from "material-ui/Drawer";
 import IconButton from "material-ui/IconButton";
 import SendIcon from "material-ui/svg-icons/content/send";
-import {setTab, toggleSparqlQueryDrawer} from "../../app/appActions";
-import {executeSparqlQuery} from "../../sparqlQuery/sparqlQueryActions";
+import {toggleSparqlQueryDrawer} from "../../common/commonActionCreators";
+import {sendSparqlQueryRequest} from "../../sparqlQuery/sparqlQueryActionCreatorWrappers";
 
 class SparqlQueryDrawer extends Component {
   constructor() {
@@ -17,12 +17,12 @@ class SparqlQueryDrawer extends Component {
     const {
       dispatch,
       isSparqlQueryDrawerOpen,
-      sparqlQueryExpression
+      sparqlQueryExpression,
+      sparqlQueryName
     } = this.props;
     e.preventDefault();
-    dispatch(executeSparqlQuery(sparqlQueryExpression));
+    dispatch(sendSparqlQueryRequest(sparqlQueryExpression, sparqlQueryName));
     dispatch(toggleSparqlQueryDrawer(isSparqlQueryDrawerOpen));
-    dispatch(setTab("sparqlQuery"));
   }
 
   props: {
@@ -86,14 +86,17 @@ class SparqlQueryDrawer extends Component {
             </tbody>
           </table>
           <IconButton
+            children={<SendIcon hoverColor={colors.deepOrange300}/>}
             className="button sparqlQueryButton"
+            iconStyle={{
+              "color": colors.white,
+              "height": "40px",
+              "width": "40px"
+            }}
             onTouchTap={this.handleSparqlQueryButtonTouchTap}
-          >
-            <SendIcon
-              color={colors.white}
-              hoverColor={colors.deepOrange300}
-            />
-          </IconButton>
+            tooltip={"Execute this SPARQL query."}
+            touch
+          />
           <div className="sparqlQueryExpression">
             <div className="syntax prefixDeclaration">
               {

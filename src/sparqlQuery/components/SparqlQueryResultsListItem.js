@@ -2,9 +2,9 @@
 import React, {Component} from "react";
 import {ListItem} from "material-ui/List";
 import ClassIcon from "material-ui/svg-icons/action/class";
-import Entity from "../../entity/Entity";
-import {executeEntityRequest, setEntity} from "../../entity/entityActions";
-import {setTab} from "../../app/appActions";
+import Entity from "../../entity/models/Entity";
+import {selectEntity} from "../../entity/entityActionCreators";
+import {sendEntityRequest} from "../../entity/entityActionCreatorWrappers";
 import {colorScheme} from "../../util";
 
 class SparqlQueryResultsListItem extends Component {
@@ -20,9 +20,8 @@ class SparqlQueryResultsListItem extends Component {
     } = this.props;
     const {value} = entity;
     e.preventDefault();
-    dispatch(setEntity(value));
-    dispatch(executeEntityRequest(value));
-    dispatch(setTab("entityGraph"));
+    dispatch(selectEntity(value));
+    dispatch(sendEntityRequest(value));
   }
 
   props: {
