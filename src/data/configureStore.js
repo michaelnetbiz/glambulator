@@ -3,7 +3,7 @@ import {applyMiddleware, compose, createStore} from "redux";
 import thunk from "redux-thunk";
 import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import logger from "redux-logger";
-import rootReducer from "../rootReducer";
+import rootReducer from "./rootReducer";
 
 /* eslint-disable no-underscore-dangle */
 const configureStore = () => {

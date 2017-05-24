@@ -6,9 +6,9 @@ import * as colors from "material-ui/styles/colors";
 import CloseIcon from "material-ui/svg-icons/navigation/close";
 import CodeIcon from "material-ui/svg-icons/action/code";
 import MenuIcon from "material-ui/svg-icons/navigation/menu";
-import {toggleNavDrawer, toggleSparqlQueryDrawer} from "../appActions";
+import {toggleNavDrawer, toggleSparqlQueryDrawer} from "../commonActionCreators";
 
-class GlambulatorBar extends Component {
+class ActionBar extends Component {
   constructor() {
     super();
     this.handleNavDrawerButtonTouchTap = this.handleNavDrawerButtonTouchTap.bind(this);
@@ -95,4 +95,4 @@ class GlambulatorBar extends Component {
   }
 }
 
-export default GlambulatorBar;
+export default ActionBar;

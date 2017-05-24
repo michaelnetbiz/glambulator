@@ -16,8 +16,8 @@ class MainContainer extends Component {
 }
 
 const mapStateToProps = (state: Object) => {
-  const {ui} = state;
-  const {currentTab} = ui;
+  const {common} = state;
+  const {currentTab} = common;
   return {
     currentTab
   };

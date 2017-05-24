@@ -17,14 +17,14 @@ class NavContainer extends Component {
 
 const mapStateToProps = (state: Object) => {
   const {
-    sparqlQuery,
-    ui
+    common,
+    sparqlQuery
   } = state;
-  const {sparqlQueryDescription, sparqlQueryExpression, sparqlQueryName} = sparqlQuery;
   const {
     isNavDrawerOpen,
     isSparqlQueryDrawerOpen
-  } = ui;
+  } = common;
+  const {sparqlQueryDescription, sparqlQueryExpression, sparqlQueryName} = sparqlQuery;
   return {
     isNavDrawerOpen,
     isSparqlQueryDrawerOpen,

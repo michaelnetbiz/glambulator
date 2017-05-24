@@ -2,10 +2,10 @@
 import React, {Component} from "react";
 import {Tab, Tabs} from "material-ui/Tabs";
 import * as colors from "material-ui/styles/colors";
+import {setTab} from "../commonActionCreators";
 import EntityGraphContainer from "../../entity/containers/EntityGraphContainer";
 import ReferenceModelContainer from "../../referenceModel/containers/ReferenceModelContainer";
 import SparqlQueryContainer from "../../sparqlQuery/containers/SparqlQueryContainer";
-import {setTab} from "../appActions";
 import ReferenceModelTabLabel from "../../referenceModel/components/ReferenceModelTabLabel";
 import EntityGraphTabLabel from "../../entity/components/EntityGraphTabLabel";
 import SparqlQueryResultsTabLabel from "../../sparqlQuery/components/SparqlQueryResultsTabLabel";

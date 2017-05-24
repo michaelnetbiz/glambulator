@@ -1,6 +1,6 @@
 // @flow
 import React, {Component} from "react";
-import GlambulatorBar from "./GlambulatorBar";
+import ActionBar from "./ActionBar";
 import NavDrawer from "./NavDrawer";
 import SparqlQueryDrawer from "../../sparqlQuery/components/SparqlQueryDrawer";
 
@@ -20,7 +20,7 @@ class Nav extends Component {
     } = this.props;
     return (
       <div className="nav">
-        <GlambulatorBar
+        <ActionBar
           dispatch={dispatch}
           isNavDrawerOpen={isNavDrawerOpen}
           isSparqlQueryDrawerOpen={isSparqlQueryDrawerOpen}
