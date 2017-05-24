@@ -1,5 +1,5 @@
 // @flow
-import {makeHash} from "../util";
+import {makeHash} from "../../util";
 import Entity from "./Entity";
 
 class EntityStatement {

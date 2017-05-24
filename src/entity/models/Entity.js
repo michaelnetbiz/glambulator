@@ -4,7 +4,7 @@ import {
   groupExpressions,
   makeHash,
   normalizeString
-} from "../util";
+} from "../../util";
 
 class Entity {
 
@@ -39,8 +39,10 @@ class Entity {
         }
         return acc;
       }, -1);
+    } else if (this.type === "literal") {
+      this.groupNumber = Object.keys(groupExpressions).length;
     } else {
-      this.groupNumber = Object.keys(groupExpressions).length + 1;
+      this.groupNumber = 42;
     }
   }
 
