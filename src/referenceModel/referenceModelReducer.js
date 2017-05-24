@@ -1,21 +1,21 @@
 // @flow
-import {INITIAL_REFERENCE_MODEL_STATE} from "../app/store/initialState";
+import {REFERENCE_MODEL} from "../data/initialState";
 import {
   GET_REFERENCE_MODEL,
-  SET_REFERENCE_MODEL
-} from "./referenceModelActions";
+  RECEIVE_REFERENCE_MODEL
+} from "./referenceModelActionTypes";
 
-const referenceModelReducer = (state: Object = INITIAL_REFERENCE_MODEL_STATE, action: Object) => {
+const referenceModelReducer = (state: Object = REFERENCE_MODEL, action: Object) => {
   switch (action.type) {
     case GET_REFERENCE_MODEL: {
       return Object.assign({}, state, {
         "isReferenceModelLoading": true
       });
     }
-    case SET_REFERENCE_MODEL: {
+    case RECEIVE_REFERENCE_MODEL: {
       return Object.assign({}, state, {
         "isReferenceModelLoading": false,
-        "resources": action.resources
+        "resources": action.referenceModel
       });
     }
     default: {

@@ -1,21 +1,33 @@
 // @flow
-import {INITIAL_SPARQL_QUERY_STATE} from "../app/store/initialState";
+import {SPARQL_QUERY} from "../data/initialState";
 import {
-  EXECUTE_SPARQL_QUERY_EXPRESSION,
-  RECEIVE_SPARQL_QUERY_RESULTS,
+  GET_SPARQL_QUERY,
+  GET_SPARQL_QUERY_FAILURE,
+  GET_SPARQL_QUERY_SUCCESS,
+  RECEIVE_SPARQL_QUERY,
   SET_SPARQL_QUERY
-} from "./sparqlQueryActions";
+} from "./sparqlQueryActionTypes";
 
-const sparqlQueryReducer = (state: Object = INITIAL_SPARQL_QUERY_STATE, action: Object) => {
+const sparqlQueryReducer = (state: Object = SPARQL_QUERY, action: Object) => {
   switch (action.type) {
-    case EXECUTE_SPARQL_QUERY_EXPRESSION:
+    case GET_SPARQL_QUERY:
       return Object.assign({}, state, {
         "isSparqlQueryLoading": true
       });
-    case RECEIVE_SPARQL_QUERY_RESULTS:
+    case GET_SPARQL_QUERY_FAILURE: {
       return Object.assign({}, state, {
         "isSparqlQueryLoading": false,
-        "sparqlQueryResults": action.sparqlQueryResults
+        "sparqlQueryResults": null
+      });
+    }
+    case GET_SPARQL_QUERY_SUCCESS: {
+      return Object.assign({}, state, {
+        "isSparqlQueryLoading": false
+      });
+    }
+    case RECEIVE_SPARQL_QUERY:
+      return Object.assign({}, state, {
+        "sparqlQueryResults": action.sparqlQuery
       });
     case SET_SPARQL_QUERY:
       return Object.assign({}, state, {
