@@ -2,8 +2,9 @@
 import React, {Component} from "react";
 import {select} from "d3-selection";
 import * as colors from "material-ui/styles/colors";
-import {executeEntityRequest} from "../entityActions";
+import {sendEntityRequest} from "../entityActionCreatorWrappers";
 import {colorScheme} from "../../util";
+import {setFeedback} from "../../common/commonActionCreators";
 
 class Vertex extends Component {
   static draw(selection: Object, size: number) {
@@ -44,13 +45,14 @@ class Vertex extends Component {
   constructor(props: Object) {
     super(props);
     const {data, size} = this.props;
-    const {abbreviatedValue, className, groupNumber, id, isFocus, value} = data;
+    const {abbreviatedValue, className, groupNumber, id, isFocus, type, value} = data;
     this.abbreviatedValue = abbreviatedValue;
     this.className = className;
     this.groupNumber = groupNumber;
     this.id = id.toString();
     this.isFocus = isFocus;
     this.size = size;
+    this.type = type;
     this.value = value;
     this.handleVertexClick = this.handleVertexClick.bind(this);
   }
@@ -76,7 +78,12 @@ class Vertex extends Component {
     const {
       dispatch
     } = this.props;
-    dispatch(executeEntityRequest(this.value));
+    if (this.type === "uri") {
+      return dispatch(sendEntityRequest(this.value));
+    }
+    return dispatch(setFeedback({
+      "feedbackContent": `Vertex represents a ${this.type}.`
+    }));
   }
 
   props: {
@@ -92,6 +99,7 @@ class Vertex extends Component {
   id: string;
   isFocus: boolean;
   size: number;
+  type: string;
   value: string;
 
   render() {

@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {forceCollide, forceLink, forceManyBody, forceSimulation, forceX, forceY} from "d3-force";
 import EntityGraph from "../components/EntityGraph";
-import Entity from "../Entity";
+import Entity from "../models/Entity";
 
 class EntityGraphContainer extends Component {
   static prepareEdgeData(statements: Map<number, Object>) {
@@ -29,12 +29,12 @@ class EntityGraphContainer extends Component {
     return [];
   }
 
-  static prepareVertexData(selection: Entity, entities: Map<number, Entity>) {
+  static prepareVertexData(entitySelection: Entity, entities: Map<number, Entity>) {
     if (entities.size) {
       return Array.prototype.slice.call([...entities].reduce((acc, currPair) => {
         let entity: Entity;
         [, entity] = currPair;
-        if (selection.value === entity.value) {
+        if (entitySelection.value === entity.value) {
           entity.toggleFocus();
         }
         return acc.concat(entity);
@@ -50,27 +50,24 @@ class EntityGraphContainer extends Component {
   shouldComponentUpdate(nextProps: Object) {
     let areEdgesUpdated: boolean;
     let areVerticesUpdated: boolean;
+    let willEntityLoad: boolean;
+    let wasEntityLoadingPrev: boolean;
+    wasEntityLoadingPrev = this.props.isEntityLoading;
+    willEntityLoad = nextProps.isEntityLoading;
     areEdgesUpdated = nextProps.edgeData.length > this.props.edgeData.length;
     areVerticesUpdated = nextProps.vertexData.length > this.props.vertexData.length;
-    return areEdgesUpdated || areVerticesUpdated;
+    return areEdgesUpdated || areVerticesUpdated || willEntityLoad || wasEntityLoadingPrev;
   }
 
   render() {
-    let thingToRender;
-    if (this.props.vertexData.length > 0) {
-      thingToRender = <EntityGraph {...this.props} />;
-    } else {
-      thingToRender = <h1>{"No entity selected."}</h1>;
-    }
-    return (
-      thingToRender
-    );
+    return <EntityGraph {...this.props} />;
   }
 }
 
 const mapStateToProps = (state: Object) => {
-  const {entity} = state;
-  const {entities, selection, statements} = entity;
+  const {common, entity} = state;
+  const {loadingColor} = common;
+  const {entities, entityGroupFilter, entitySelection, isEntityLoading, statements} = entity;
   const height = 690;
   const width = 1104;
   const size = (height / entities.size) / 7.5;
@@ -79,19 +76,27 @@ const mapStateToProps = (state: Object) => {
       .id((d) => {
         return d.id;
       })
-      .distance((size * 40) + 200)
+      .distance(width / 3)
     )
     .force("repel", forceManyBody().strength(-100))
     .force("x", forceX(width / 2).strength(0.2))
     .force("y", forceY(height / 2).strength(0.2))
     .force("collide", forceCollide(size * 10));
   const edgeData = EntityGraphContainer.prepareEdgeData(statements);
-  const vertexData = EntityGraphContainer.prepareVertexData(selection, entities);
+  const vertexData = EntityGraphContainer.prepareVertexData(entitySelection, entities);
+  const groups = [...entities].reduce((acc, currElem) => {
+    let [, entity] = currElem;
+    return acc.add(entity.groupNumber);
+  }, new Set());
   return {
     edgeData,
     entities,
+    entityGroupFilter,
+    entitySelection,
+    groups,
     height,
-    selection,
+    isEntityLoading,
+    loadingColor,
     simulation,
     size,
     statements,

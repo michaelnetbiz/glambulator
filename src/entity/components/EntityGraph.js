@@ -2,7 +2,7 @@
 import React, {Component} from "react";
 import {event, select} from "d3-selection";
 import {drag} from "d3-drag";
-import {Card, CardMedia, CardTitle} from "material-ui/Card";
+import {Card, CardHeader, CardText} from "material-ui/Card";
 import {
   Table,
   TableBody,
@@ -12,9 +12,13 @@ import {
   TableRowColumn
 } from "material-ui/Table";
 import * as colors from "material-ui/styles/colors";
-import Entity from "../Entity";
+import {colorScheme, groupExpressions} from "../../util";
+import Entity from "../models/Entity";
 import Edge from "./Edge";
+import EntityGroupChip from "./EntityGroupChip";
 import Vertex from "./Vertex";
+import LoadingMessageDrawer from "../../common/components/LoadingMessageDrawer";
+import NullMessage from "../../common/components/NullMessage";
 
 class EntityGraph extends Component {
   static update(selection) {
@@ -112,8 +116,12 @@ class EntityGraph extends Component {
     dispatch: () => mixed;
     edgeData: Array<Object>;
     entities: Map<number, Entity>;
+    entityGroupFilter: number;
+    entitySelection: Entity;
+    groups: Array<number>;
     height: number;
-    selection: Entity;
+    isEntityLoading: boolean;
+    loadingColor: string;
     simulation: () => mixed;
     size: number;
     statements: Map<number, Object>;
@@ -124,18 +132,27 @@ class EntityGraph extends Component {
   handleTick: () => mixed;
 
   render() {
-    const {dispatch, edgeData, height, selection, size, statements, vertexData, width} = this.props;
+    let edges: Array<Object>;
+    let vertices: Array<Object>;
+    const {dispatch, edgeData, height, size, statements, vertexData, width} = this.props;
     this.props.simulation.nodes(this.props.vertexData).on("tick", this.handleTick);
     this.props.simulation.force("edge").links(this.props.edgeData);
-    const edges = edgeData.map((e, ix) => {
-      return (
-        <Edge
-          data={e}
-          key={ix}
-        />
-      );
-    });
-    const vertices = vertexData.map((v, ix) => {
+    // if (entityGroupFilter !== -1) {
+    //   vertices = vertexData.filter((v) => {
+    //     let isVertexMemberFilteredGroup: boolean;
+    //     isVertexMemberFilteredGroup = v.groupNumber === entityGroupFilter;
+    //     return isVertexMemberFilteredGroup;
+    //   });
+    //   edges = edgeData.filter((e) => {
+    //     let isEdgeNeighborFilteredGroup: boolean;
+    //     console.log(e);
+    //     return e;
+    //   });
+    // } else {
+    //   edges = edgeData;
+    //   vertices = vertexData;
+    // }
+    vertices = vertexData.map((v, ix) => {
       return (
         <Vertex
           data={v}
@@ -145,89 +162,170 @@ class EntityGraph extends Component {
         />
       );
     });
+    edges = edgeData.map((e, ix) => {
+      return (
+        <Edge
+          data={e}
+          key={ix}
+        />
+      );
+    });
+    const subjects = [...statements].reduce((acc, currElem) => {
+      let [, stmt] = currElem;
+      return acc.add(stmt.subj);
+    }, new Set());
     return (
       <div className={"entityGraph"}>
-        <Card>
-          <CardMedia>
-            <svg
-              preserveAspectRatio={"xMidYMid slice"}
-              ref={"svg"}
-              viewBox={"0 0 " + width + " " + height}
-              xmlns={"http://www.w3.org/2000/svg"}
-              xmlnsXlink={"http://www.w3.org/1999/xlink"}
-            >
-              <defs>
-                <marker
-                  fill={colors.blueGrey600}
-                  id={"arrowMarker"}
-                  markerHeight={6}
-                  markerWidth={6}
-                  orient={"auto"}
-                  refX={size}
-                  refY={0}
-                  stroke={colors.blueGrey600}
-                  strokeWidth={1}
-                  viewBox={"0 -5 10 10"}
-                >
-                  <path d={"M0, -5L10, 0L0, 5"}/>
-                </marker>
-              </defs>
-              {edges}
-              {vertices}
-            </svg>
-          </CardMedia>
-          <CardTitle
-            subtitle={selection.type}
-            title={selection.value}
-          />
-        </Card>
-        <Table
-          className={"wtf"}
-          selectable={false}
-        >
-          <TableHeader
-            displaySelectAll={false}
-            enableSelectAll={false}
-          >
-            <TableRow
-              selectable={false}
-            >
-              <TableHeaderColumn>
-                {"subject"}
-              </TableHeaderColumn>
-              <TableHeaderColumn>
-                {"object"}
-              </TableHeaderColumn>
-              <TableHeaderColumn>
-                {"predicate"}
-              </TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody
-            showRowHover
-          >
-            {
-              [...statements].map((currElem) => {
-                let [i, stmt] = currElem;
-                return (
-                  <TableRow
-                    key={i}
-                    selectable={false}
+        <LoadingMessageDrawer
+          isLoading={this.props.isEntityLoading}
+          loadingColor={this.props.loadingColor}
+        />
+        {
+          this.props.vertexData.length > 0
+            ?
+            <div>
+              <ul className={"entityGroupChipSet"}>
+                {
+                  [...this.props.groups].map((elem, ix) => {
+                    return (
+                      <EntityGroupChip
+                        dispatch={dispatch}
+                        groupNumber={elem}
+                        key={ix}
+                      />
+                    );
+                  })
+                }
+              </ul>
+              {
+                [...subjects].map((subj, ix) => {
+                  return (
+                    <Card
+                      className={"subjectCard"}
+                      key={ix}
+                    >
+                      <CardHeader
+                        actAsExpander
+                        className={"subjectCardHeader"}
+                        showExpandableButton
+                        subtitle={Object.keys(groupExpressions)[subj.groupNumber]}
+                        title={subj.value}
+                        titleColor={colorScheme(subj.groupNumber)}
+                      />
+                      <CardText
+                        color={colorScheme(subj.groupNumber)}
+                        expandable
+                      >
+                        <Table
+                          selectable={false}
+                        >
+                          <TableHeader
+                            adjustForCheckbox={false}
+                            displaySelectAll={false}
+                            enableSelectAll={false}
+                          >
+                            <TableRow
+                              selectable={false}
+                            >
+                              <TableHeaderColumn
+                                children={`Objects predicated of ${subj.value}`}
+                                colSpan={3}
+                                style={{
+                                  "textAlign": "left"
+                                }}
+                                tooltip={`This is a list of predicates and objects where the subject is ${subj.value}.`}
+                                tooltipStyle={{
+                                  "fontSize": "1em"
+                                }}
+                              />
+                            </TableRow>
+                            <TableRow
+                              selectable={false}
+                            >
+                              <TableHeaderColumn
+                                children={"Predicates"}
+                                colSpan={2}
+                                style={{
+                                  "textAlign": "left"
+                                }}
+                                tooltip={`These are predicates that connect the subject (${subj.value}) to some object.`}
+                                tooltipStyle={{
+                                  "fontSize": "1em"
+                                }}
+                              />
+                              <TableHeaderColumn
+                                children={"Objects"}
+                                colSpan={2}
+                                style={{
+                                  "textAlign": "left"
+                                }}
+                                tooltip={`These are objects predicated of ${subj.value}`}
+                                tooltipStyle={{
+                                  "fontSize": "1em"
+                                }}
+                              />
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody
+                            displayRowCheckbox={false}
+                            showRowHover
+                          >
+                            {
+                              [...statements].map((currElem) => {
+                                let [i, stmt] = currElem;
+                                if (stmt.subj.value === subj.value) {
+                                  return (
+                                    <TableRow
+                                      key={i}
+                                      selectable={false}
+                                    >
+                                      <TableRowColumn
+                                        children={stmt.pred.value}
+                                      />
+                                      <TableRowColumn
+                                        children={stmt.obj.value}
+                                      />
+                                    </TableRow>
+                                  );
+                                }
+                              })}
+                          </TableBody>
+                        </Table>
+                      </CardText>
+                    </Card>
+                  );
+                })
+              }
+              <svg
+                preserveAspectRatio={"xMidYMid slice"}
+                ref={"svg"}
+                viewBox={"0 0 " + width + " " + height}
+                xmlns={"http://www.w3.org/2000/svg"}
+                xmlnsXlink={"http://www.w3.org/1999/xlink"}
+              >
+                <defs>
+                  <marker
+                    fill={colors.blueGrey600}
+                    id={"arrowMarker"}
+                    markerHeight={6}
+                    markerWidth={6}
+                    orient={"auto"}
+                    refX={size}
+                    refY={0}
+                    stroke={colors.blueGrey600}
+                    strokeWidth={1}
+                    viewBox={"0 -5 10 10"}
                   >
-                    <TableRowColumn>
-                      <td>{stmt.subj.value}</td>
-                    </TableRowColumn>
-                    <TableRowColumn>
-                      <td>{stmt.pred.value}</td>
-                    </TableRowColumn>
-                    <TableRowColumn>
-                      <td>{stmt.obj.value}</td>
-                    </TableRowColumn>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
+                    <path d={"M0, -5L10, 0L0, 5"}/>
+                  </marker>
+                </defs>
+                {edges}
+                {vertices}
+              </svg>
+            </div>
+            :
+            <NullMessage value={"entity selection"}/>
+        }
       </div>
     );
   }
