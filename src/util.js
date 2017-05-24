@@ -58,7 +58,8 @@ export const groupExpressions = {
   "rdf": "http:\/\/www\.w3\.org\/1999\/02\/22\-rdf\-syntax\-ns\#.*",
   "rdfs": "http:\/\/www\.w3\.org\/2000\/01\/rdf\-schema\#.*",
   "skos": "http:\/\/www\.w3\.org\/2004\/02\/skos\/core\#.*",
-  "owl": "http:\/\/www\.w3\.org\/2002\/07\/owl\#.*"
+  "owl": "http:\/\/www\.w3\.org\/2002\/07\/owl\#.*",
+  "xml": "http:\/\/www\.w3\.org\/2001\/XMLSchema\#.*"
 };
 
 export const classExpressions = {
@@ -94,4 +95,10 @@ export const constructQueryIsA = (obj: string) => {
       "limit": 20
     }
   };
+};
+
+// Converts hex to rgba
+export const hexToRgba = (hex: string, alpha: number) => {
+  let rgb = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return `rgba(${parseInt(rgb[1], 16)}, ${parseInt(rgb[2], 16)}, ${parseInt(rgb[3], 16)}, ${parseFloat(alpha)})`;
 };
