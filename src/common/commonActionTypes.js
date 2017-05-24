@@ -1,0 +1,6 @@
+// @flow
+export const CLEAR_FEEDBACK = "CLEAR_FEEDBACK";
+export const SET_FEEDBACK = "SET_FEEDBACK";
+export const SET_TAB = "SET_TAB";
+export const TOGGLE_NAV_DRAWER = "TOGGLE_NAV_DRAWER";
+export const TOGGLE_SPARQL_QUERY_DRAWER = "TOGGLE_SPARQL_QUERY_DRAWER";
