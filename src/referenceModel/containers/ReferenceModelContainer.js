@@ -9,22 +9,17 @@ class ReferenceModelContainer extends Component {
   }
 
   render() {
-    let thingToRender;
-    if (this.props.resources) {
-      thingToRender = <ReferenceModelResourceList {...this.props}/>;
-    } else {
-      thingToRender = <h1>{"Loading..."}</h1>;
-    }
-    return (
-      thingToRender
-    );
+    return <ReferenceModelResourceList {...this.props}/>;
   }
 }
 
 const mapStateToProps = (state: Object) => {
-  const {referenceModel} = state;
-  const {resources} = referenceModel;
+  const {common, referenceModel} = state;
+  const {loadingColor} = common;
+  const {isReferenceModelLoading, resources} = referenceModel;
   return {
+    isReferenceModelLoading,
+    loadingColor,
     resources
   };
 };

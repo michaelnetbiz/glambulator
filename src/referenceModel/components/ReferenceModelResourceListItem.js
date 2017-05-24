@@ -4,9 +4,9 @@ import * as colors from "material-ui/styles/colors";
 import {ListItem} from "material-ui/List";
 import IconButton from "material-ui/IconButton";
 import AddBox from "material-ui/svg-icons/content/add-box";
-import {setSparqlQuery} from "../../sparqlQuery/sparqlQueryActions";
+import {setSparqlQuery} from "../../sparqlQuery/sparqlQueryActionCreators";
 import {constructQueryIsA} from "../../util";
-import {setFeedback} from "../../app/appActions";
+import {setFeedback} from "../../common/commonActionCreators";
 
 class ReferenceModelResourceListItem extends Component {
   constructor(props: Object) {
@@ -19,7 +19,8 @@ class ReferenceModelResourceListItem extends Component {
     e.preventDefault();
     dispatch(setSparqlQuery(constructQueryIsA(resource.id)));
     dispatch(setFeedback({
-      "message": `Set Sparql query to return instances of ${resource.id} (${resource.name})`
+      "feedbackAction": "execute",
+      "feedbackContent": `Ready to query instances of ${resource.id}`
     }));
   }
 
@@ -33,6 +34,7 @@ class ReferenceModelResourceListItem extends Component {
         key={resource.id}
         nestedItems={[
           <ListItem
+            disabled
             key={resource.id}
             primaryText={resource.description}
             secondaryText={resource.type}
