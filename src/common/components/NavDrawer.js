@@ -11,6 +11,7 @@ import PaletteIcon from "material-ui/svg-icons/image/palette";
 import CopyrightIcon from "material-ui/svg-icons/action/copyright";
 import {groupExpressions} from "../../util";
 import EntityGroupChip from "../../entity/components/EntityGroupChip";
+import ccIcon from "../../assets/by-nc-sa.svg";
 
 const NavDrawer = (params: Object) => {
   const {
@@ -165,9 +166,11 @@ const NavDrawer = (params: Object) => {
             </ListItem>,
             <ListItem
               children={
-                <span>
+                <span
+                  key={0}
+                >
                   <img
-                    src={"assets/by-nc-sa.svg"}
+                    src={ccIcon}
                   />
                   <div
                     style={{
