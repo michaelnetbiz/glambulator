@@ -149,10 +149,10 @@ const NavDrawer = (params: Object) => {
           nestedItems={[
             <ListItem
               className={"navDrawerNestedListItem"}
-              href="//collection.britishmuseum.org/licensing.html"
+              href={"//creativecommons.org/licenses/by-nc-sa/4.0/"}
               key={0}
             >
-              {"Original license."}
+              {"License."}
               <OpenInNewIcon
                 color={colors.teal400}
                 style={{
@@ -164,9 +164,31 @@ const NavDrawer = (params: Object) => {
               />
             </ListItem>,
             <ListItem
-              children={"Credit for these data goes to the British Museum. No changes made to data."}
+              children={
+                <span>
+                  <img
+                    src={"assets/by-nc-sa.svg"}
+                  />
+                  <div
+                    style={{
+                      "fontSize": ".75em"
+                    }}
+                  >
+                    {"© Trustees of the British Museum."}
+                    <OpenInNewIcon
+                      color={colors.teal400}
+                      style={{
+                        "height": "16px",
+                        "left": "7px",
+                        "top": "0px",
+                        "width": "16px"
+                      }}
+                    />
+                  </div>
+                </span>
+              }
               className={"navDrawerNestedListItem"}
-              disabled
+              href={"//collection.britishmuseum.org/licensing.html"}
               key={1}
             />
           ]}
