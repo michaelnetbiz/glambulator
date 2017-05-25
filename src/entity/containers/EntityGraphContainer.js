@@ -68,20 +68,21 @@ const mapStateToProps = (state: Object) => {
   const {common, entity} = state;
   const {loadingColor} = common;
   const {entities, entityGroupFilter, entitySelection, isEntityLoading, statements} = entity;
+  const n = entities.size;
   const height = 883.2;
   const width = 1104;
-  const size = (width / entities.size) / 7.5;
+  const size = (width / n) / 7.5;
   const simulation = forceSimulation()
     .force("edge", forceLink()
       .id((d) => {
         return d.id;
       })
-      .distance(size * 8)
+      .distance(((n * 0.75) + size) * 3)
     )
     .force("repel", forceManyBody().strength(-150))
     .force("x", forceX(width / 2).strength(0.15))
     .force("y", forceY(height / 2).strength(0.15))
-    .force("collide", forceCollide(((entities.size + size) * 1.85) / size));
+    .force("collide", forceCollide(((n + size) * 2) / size));
   const edgeData = EntityGraphContainer.prepareEdgeData(statements);
   const vertexData = EntityGraphContainer.prepareVertexData(entitySelection, entities);
   const groups = [...entities].reduce((acc, currElem) => {
