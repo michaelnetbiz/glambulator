@@ -1,9 +1,9 @@
 // @flow
 import ResourceCollection from "./models/ResourceCollection";
+import rdfsReferenceModel from "../assets/cidoc_crm_v6.2.1-draft-b-2015October.rdfs";
 
 export const fetchReferenceModel = (): Promise<Response> => {
-  const referenceModelEndpoint = "http://glambulator.matrix.msu.edu/cidoc_crm_v621.rdfs"; //"http://localhost:3000/assets/cidoc_crm_v6.2.1-draft-b-2015October.rdfs"
-  return fetch(referenceModelEndpoint);
+  return fetch(rdfsReferenceModel);
 };
 
 export const parseReferenceModel = (referenceModelResponse: Object): ResourceCollection => {
