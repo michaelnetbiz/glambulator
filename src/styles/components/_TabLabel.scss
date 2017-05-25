@@ -1,6 +1,9 @@
 .tabLabel {
-  font-size: 0.75em;
+  font-size: 0.5em !important;
+  @media (min-width: 30em) {
+    font-size: 0.7em !important;
+  }
   @media (min-width: 37.5em) {
-    font-size: 1em;
+    font-size: 1em !important;
   }
 }
