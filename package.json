@@ -1,9 +1,8 @@
 {
   "name": "glambulator",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Application for exploring cidoc-crm specification, implementations thereof, and collections organized by it",
   "scripts": {
-    "build": "webpack --optimize-minimize --define process.env.NODE_ENV=\"'production'\" && cp ./src/assets/cidoc_crm_v6.2.1-draft-b-2015October.rdfs ./dist/cidoc_crm_v621.rdfs",
     "clean-dist": "node_modules/.bin/rimraf ./dist && mkdir dist",
     "flow": "flow",
     "lint": "node_modules/.bin/esw src",
@@ -40,7 +39,7 @@
     "css-loader": "^0.28.2",
     "eslint": "^3.19.0",
     "eslint-plugin-flowtype": "^2.33.0",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
     "eslint-watch": "^3.1.0",
@@ -53,7 +52,7 @@
     "html-webpack-plugin": "^2.28.0",
     "html-webpack-template": "^6.0.1",
     "jsdom": "^11.0.0",
-    "mocha": "^3.4.1",
+    "mocha": "^3.4.2",
     "node-sass": "^4.5.3",
     "normalize-scss": "^7.0.0",
     "npm-run-all": "^4.0.2",
