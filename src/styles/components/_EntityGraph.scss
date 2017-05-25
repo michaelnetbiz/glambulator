@@ -25,3 +25,8 @@
 .entityGraph .vertexLabel {
   font-family: "Roboto Mono", Courier, monospace;
 }
+
+.entityGraph rect {
+  cursor: pointer;
+  pointer-events: all;
+}
