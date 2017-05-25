@@ -1,5 +1,8 @@
-let HtmlWebpackPlugin = require("html-webpack-plugin");
-let FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+"use strict";
+
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 module.exports = {
   "devServer": {
@@ -7,15 +10,19 @@ module.exports = {
     "historyApiFallback": true,
     "port": 3000
   },
-  "devtool": "cheap-module-eval-source-map",
+  "devtool": "source-map",
   "entry": [
     "./src/index"
   ],
+  "resolve": {
+    "modules": [
+      "node_modules"
+    ]
+  },
   "module": {
     "rules": [
       {
         "test": /\.js$/,
-        "exclude": /node_modules/,
         "use": [
           "babel-loader"
         ]
@@ -137,6 +144,21 @@ module.exports = {
         "yandex": false,
         "windows": true
       }
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        "NODE_ENV": JSON.stringify("production")
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      "compress": {
+        "warnings": false,
+        "reduce_vars": false
+      },
+      "output": {
+        "comments": false
+      },
+      "sourceMap": true
     })
   ],
   "target": "web"
