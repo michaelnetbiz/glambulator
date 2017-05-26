@@ -7,11 +7,47 @@ Application for exploring the CIDOC Conceptual Reference Model (CRM) and phenome
  * add more Sparql endpoints
  * persist state to local storage
 
+## Run the app locally
+ 1. Ensure that your environment contains the basic dependency of the project: node.js (using nvm)
+
+ 2. Clone this repository via ssh
+ 
+        git clone git@github.com:michaelnetbiz/glambulator.git
+ 
+    or https
+    
+        git clone https://github.com/michaelnetbiz/glambulator.git
+
+ 3. Navigate into the directory
+ 
+        cd TransitionalCareAnalyticsDashboard/ 
+        
+ 4. Confirm whether your current version of node.js matches the project's version (declared in `.nvmrc`)
+ 
+ 5. Install dependencies
+ 
+        npm install
+        
+ 6. Run app locally
+ 
+        npm start
+
+## Application Structure
+As is the case with most implementations of React.js with Redux that are on the simpler side, 
+    
+    <div id="root"> <!-- React application mount point-->
+      <Provider>
+        <MuiThemeProvider>
+          
+        </MuiThemeProvider>
+      </Provider>
+    
+
 ## Data Management
 The application implements a Redux store to manage state.
 
 ### Why Redux?
-That is to say, why not provide data to React components and their children using component state, implementing some flavor of Facebook's Flux application architecture?
+That is to say, why not provide data to React components and their children using component state, implementing some flavor of Facebook's Flux application architecture? Frankly, the appealing thing about React.js development, in the first place, was the unidirectional data flow, which is a core principle of both Redux and Flux/Flux implementations. Two reasons, in the end (curiosity aside).
 
 #### Local storage API
 Persisting state to the browser's local storage is simply a matter of serializing the single state object and deserializing it, setting as the initial state at the beginning of the application lifecycle.
@@ -177,10 +213,44 @@ In keeping with the Redux store pattern, the only ways to change state is by dis
 |TOGGLE_SPARQL_QUERY_DRAWER |common        |   	                    |
 |UPDATE_ENTITY_DATA         |entity	       |
 
+### Data Model Utilities
+
+## Workflow
+
+### Version Control
+Adapted from [this post](http://nvie.com/posts/a-successful-git-branching-model).
+
+#### Iterative feature development on branch *develop*
+ 1. Checkout branch *develop*.
+ 
+        git checkout develop
+
+ 2. Create & checkout branch *some-feature* from *develop* to work on some feature.
+ 
+        git checkout -b some-feature develop
+ 
+ 3. Merge *some-feature* commits back into *develop and delete branch *some-feature*.
+ 
+        git checkout develop
+        git merge --no-ff some-feature
+        git branch -d some-feature
+        git push origin develop
+
+#### Releasing from branch *develop*
+ 1. Checkout branch *release-VERSION* from *develop* for finishing touches.
+ 
+        git checkout -b release-VERSION develop
+     
+ 2. Merge *release-VERSION* commits into *master* to release this next version, and back into *develop* as well.
+ 
+        git checkout master
+        git merge --no-ff release-VERSION
+        git checkout develop
+        git merge --no-ff release-VERSION
+        git branch -d release-VERSION
 
 
-
-
-
-
-
+### Tools and Technologies
+ * es6
+ * babel
+ * webpack
