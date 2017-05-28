@@ -213,7 +213,7 @@ In keeping with the Redux store pattern, the only ways to change state is by dis
 |TOGGLE_SPARQL_QUERY_DRAWER |common        |   	                    |
 |UPDATE_ENTITY_DATA         |entity	       |
 
-### Data Model Utilities
+### Data Management Utilities
 
 ## Workflow
 
