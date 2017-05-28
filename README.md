@@ -2,6 +2,7 @@
 Application for exploring the CIDOC Conceptual Reference Model (CRM) and phenomena annotated by it at the instance level
 
 ## To Do
+ * normalize data model
  * make Entity graph informative (!)
  * implement zoom, dragging to facilitate navigation through the potentially expansive Entity graphs
  * add more Sparql endpoints
@@ -13,7 +14,7 @@ The application implements a Redux store to manage state.
 ### Why Redux?
 That is to say, why not provide data to React components and their children using component state, implementing some flavor of Facebook's Flux application architecture?
 
-#### Local storage API
+#### Local storage
 Persisting state to the browser's local storage is simply a matter of serializing the single state object and deserializing it, setting as the initial state at the beginning of the application lifecycle.
 
 #### Testing
