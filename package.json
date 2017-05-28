@@ -1,6 +1,6 @@
 {
   "name": "glambulator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Application for exploring cidoc-crm specification, implementations thereof, and collections organized by it",
   "scripts": {
     "clean-dist": "node_modules/.bin/rimraf ./dist && mkdir dist",
