@@ -128,7 +128,7 @@ const NavDrawer = (params: Object) => {
           leftIcon={<BuildIcon color={colors.teal400}/>}
           nestedItems={[
             <ListItem
-              href={""}
+              href={"//chi.anthropology.msu.edu/2017/05/the-glambu-launch-post/"}
               key={0}
             >
               {"Blog "}
