@@ -34,7 +34,6 @@ Application for exploring the CIDOC Conceptual Reference Model (CRM) and phenome
         npm start
 
 ## Application Structure
-As is the case with most implementations of React.js with Redux that are on the simpler side, 
     
     <div id="root"> <!-- React application mount point-->
       <Provider>
