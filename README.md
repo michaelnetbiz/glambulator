@@ -6,7 +6,9 @@ Application for exploring the CIDOC Conceptual Reference Model (CRM) and phenome
  * make Entity graph informative (!)
  * implement zoom, dragging to facilitate navigation through the potentially expansive Entity graphs
  * add more Sparql endpoints
+ * add Sparql queries
  * persist state to local storage
+ * add documentation, unit-testing
 
 ## Run the app locally
  1. Ensure that your environment contains the basic dependency of the project: node.js (using nvm)
