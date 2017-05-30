@@ -13,6 +13,7 @@ import CopyrightIcon from "material-ui/svg-icons/action/copyright";
 import {groupExpressions} from "../../util";
 import EntityGroupChip from "../../entity/components/EntityGroupChip";
 import byNcSaIcon from "../../assets/by-nc-sa.svg";
+import whitePaper from "../../assets/exploring-cultural-heritage-documentation-with-glambulator.pdf";
 
 const NavDrawer = (params: Object) => {
   const {
@@ -143,7 +144,7 @@ const NavDrawer = (params: Object) => {
               />
             </ListItem>,
             <ListItem
-              href={""}
+              href={whitePaper}
               key={1}
             >
               {"White Paper "}
