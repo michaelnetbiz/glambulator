@@ -104,7 +104,21 @@ module.exports = {
         "test": /\.rdfs$/,
         "use": [
           {
-            "loader": "file-loader"
+            "loader": "file-loader",
+            "query": {
+              "name": "[name].[ext]"
+            }
+          }
+        ]
+      },
+      {
+        "test": /\.pdf$/,
+        "use": [
+          {
+            "loader": "file-loader",
+            "query": {
+              "name": "[name].[ext]"
+            }
           }
         ]
       }
