@@ -1,7 +1,7 @@
 # Glambulator
 Application for exploring the CIDOC Conceptual Reference Model (CRM) and phenomena annotated by it at the instance level
 
-## To Do
+## Enhancement ideas
  * normalize data model
  * make Entity graph informative (!)
  * implement zoom, dragging to facilitate navigation through the potentially expansive Entity graphs
