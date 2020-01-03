@@ -1,5 +1,5 @@
 # Glambulator
-Application for exploring the CIDOC Conceptual Reference Model (CRM) and phenomena annotated by it at the instance level
+Application for exploring the [CIDOC Conceptual Reference Model](https://en.wikipedia.org/wiki/CIDOC_Conceptual_Reference_Model) by example.
 
 ## Enhancement ideas
  * normalize data model
